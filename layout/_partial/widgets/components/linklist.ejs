@@ -12,8 +12,8 @@ function layoutDiv(linklist) {
   } else {
     style += `style="grid-template-columns:repeat(${columns},1fr);"`
   }
-  var align = 'center'
-  if (columns == 1 && links.length > 1) {
+  var align = linklist.align || 'center'
+  if (linklist.align == null && columns == 1 && links.length > 1) {
     align = 'left'
   }
   el += `<div class="linklist ${align}" ${style}>`

@@ -6,7 +6,6 @@ stellar:
   main_css: /css/main.css
   main_js: /js/main.js
 
-
 ######## head tags ########
 preconnect:
   # - https://gcore.jsdelivr.net
@@ -29,7 +28,6 @@ open_graph:
 structured_data:
   links: [] # your social links.
 
-
 ######## Sidebar ########
 # 左上角显示的 logo 区域，包含图标、大标题、副标题
 logo:
@@ -41,7 +39,7 @@ logo:
 menubar:
   columns: 4 # 一行多少个
   items: # 可按照自己需求增加，符合以下格式即可
-    # id: 页面中高亮的 menu_id 
+    # id: 页面中高亮的 menu_id
     # theme: 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
     # icon: 支持 svg/img 标签，可以定义在 icons.yml 文件中，也支持外部图片的 URL
     # title: 标题
@@ -67,7 +65,6 @@ menubar:
     #   title: 社交
     #   url: /friends/
 
-
 ######## Main ########
 # 站点主结构树
 site_tree:
@@ -75,14 +72,14 @@ site_tree:
   # 主页配置
   home:
     leftbar: welcome, recent
-    rightbar: 
+    rightbar:
   # 博客列表页配置
   index_blog:
     base_dir: blog # 只影响自动生成的页面路径
     menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
     leftbar: welcome, recent # for categories/tags/archives
-    rightbar: 
-    nav_tabs:  # 近期发布 分类 标签 专栏 归档 and ...
+    rightbar:
+    nav_tabs: # 近期发布 分类 标签 专栏 归档 and ...
       # '朋友文章': /friends/rss/
   # 博客专栏列表页配置
   index_topic:
@@ -93,7 +90,7 @@ site_tree:
     base_dir: wiki # 只影响自动生成的页面路径
     menu_id: wiki # 未在 front-matter 中指定 menu_id 时，layout 为 wiki 的页面默认使用这里配置的 menu_id
     leftbar: related, recent # for wiki
-    rightbar: 
+    rightbar:
     nav_tabs:
       # 'more': https://github.com/xaoxuu
   # -- 内容类页面 -- #
@@ -134,7 +131,7 @@ site_tree:
     leftbar: tagtree, recent # recent of current notebook
     rightbar: toc
   # 作者信息配置
-  author: 
+  author:
     base_dir: author # 只影响自动生成的页面路径
     menu_id: post
     leftbar: recent, timeline
@@ -149,7 +146,6 @@ site_tree:
   page:
     leftbar: recent
     rightbar: toc
-
 
 ######## Notebook ########
 notebook:
@@ -174,7 +170,6 @@ notebook:
   # 可以在笔记本 yaml 的 share 字段中覆盖此参数。
   # 可以在笔记的 front-matter/share 中覆盖此参数。
   share: false
-
 
 ######## Article ########
 article:
@@ -209,13 +204,12 @@ search:
     field: all # post, page, all
     path: /search.json # 搜索文件存放位置
     content: true # 是否搜索内容
-    skip_search:  # 指定 path 中的内容不被搜索。
+    skip_search: # 指定 path 中的内容不被搜索。
   algolia_search: # Docsearch https://docsearch.algolia.com/apply/ 申请
-    appId: 
-    apiKey: 
-    indexName: 
+    appId:
+    apiKey:
+    indexName:
     js: https://gcore.jsdelivr.net/algoliasearch/3/algoliasearch.min.js
-
 
 ######## Comments ########
 comments:
@@ -291,19 +285,19 @@ comments:
     #   - https://unpkg.com/@waline/emojis@1.1.0/bmoji
     # 设置自己的图床服务，替换默认的 Base 64 编码嵌入（有体积大小限制），在评论中上传图片更加方便
     # imageUploader:
-      # 适配了兰空图床V1、V2版本
-      # 以兰空图床V1为例，下列填写内容为：
-      # fileName: file
-      # tokenName: Authorization
-      # api: https://xxxxxx/api/v1/upload
-      # token: Bearer xxxxxxxxxxxxxx
-      # resp: data.links.url
-      # 以兰空图床V2为例，下列填写内容为：
-      # fileName: image
-      # tokenName: token
-      # api: https://xxxxxx/api/upload
-      # token: xxxxxxxxxxxxxx
-      # resp: data.url
+    # 适配了兰空图床V1、V2版本
+    # 以兰空图床V1为例，下列填写内容为：
+    # fileName: file
+    # tokenName: Authorization
+    # api: https://xxxxxx/api/v1/upload
+    # token: Bearer xxxxxxxxxxxxxx
+    # resp: data.links.url
+    # 以兰空图床V2为例，下列填写内容为：
+    # fileName: image
+    # tokenName: token
+    # api: https://xxxxxx/api/upload
+    # token: xxxxxxxxxxxxxx
+    # resp: data.url
     #   fileName: # 根据版本二选一
     #   tokenName: # 根据版本二选一
     #   api: # 图床 api 地址
@@ -326,7 +320,6 @@ comments:
       # api: 'https://xxxxxx/api/v1/upload' # 图床上传地址
       # token: 'Bearer xxxxxxxxxxxxxx' # 图床验证
       # resp: 'data.links.url' # 图片地址返回值的字段
-
 
 ######## Footer ########
 footer:
@@ -372,7 +365,6 @@ footer:
     本站由 [{author.name}](/) 使用 [{theme.name} {theme.version}]({theme.tree}) 主题创建。
     本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。
   # 主题用户越多，开发者维护和更新的积极性就越高，如果您喜欢本主题，请在适当的位置显示主题信息和仓库链接以表支持。
-
 
 ######## Tag Plugins ########
 tag_plugins:
@@ -429,7 +421,7 @@ tag_plugins:
       in_track:
         color: blue # red, orange, yellow, green, cyan, blue, purple
         label: 正常
-      at_risk: 
+      at_risk:
         color: yellow
         label: 风险
       off_track:
@@ -450,7 +442,6 @@ tag_plugins:
   chat:
     api: https://siteinfo.listentothewind.cn/api/v1
 
-
 # 基础依赖
 dependencies:
   jquery: https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js
@@ -470,7 +461,7 @@ data_services:
     js: /js/services/siteinfo.js
     # 设置 api 可以自动提取网页标题、图标，服务部署方法：https://github.com/xaoxuu/site-info-api/
     # 接口测试通过后，把按钮的 href 部分替换成 {href} 之后填写到下方，例如：https://api.xaox.cc/site_info/v1?url={href}
-    api: 
+    api:
   ghinfo:
     js: /js/services/ghinfo.js
   # 打分
@@ -498,11 +489,11 @@ data_services:
   memos:
     js: /js/services/memos.js
   # chat
-  voice: 
+  voice:
     js: /js/plugins/voice.js
-  video: 
+  video:
     js: /js/plugins/video.js
-  download-file: 
+  download-file:
     js: /js/plugins/download-file.js
   # 最新评论获取类
   twikoo:
@@ -529,7 +520,6 @@ data_services:
 # 2.3. 如果需要本地 js 文件，请放入 /source/js/plugins 文件夹中，引入方式为：utils.js('/js/plugins/xxx.js');
 # 3. 如果这个插件只需要引入外部文件，可以在【步骤 1】处增加 inject 字段，而无需进入【步骤 2】创建 ejs，参考 katex
 plugins:
-
   # preload
   preload:
     enable: true
@@ -571,16 +561,16 @@ plugins:
     duration: 1000 # ms
     interval: 100 # ms
     scale: 1 # 0.1~1
-  
+
   # AI 摘要
   # https://github.com/qxchuckle/Post-Summary-AI
-  tianli_gpt: 
+  tianli_gpt:
     enable: #true
     js: https://jsd.onmicrosoft.cn/gh/qxchuckle/Post-Summary-AI@6.0/chuckle-post-ai.min.js
     field: post # all, post, wiki
     key: 5Q5mpqRK5DkwT1X9Gi5e # tianli_gpt key
     total_length: 1000 # 设置提交的字数限制，默认为1000字，上限为5000，超过5000字符将被截断
-    typewriter: true # 打字机动画 
+    typewriter: true # 打字机动画
     summary_directly: true # 是否直接显示摘要，否则显示 AI 简介
     rec_method: all # all, web # 文章推荐方式，all：匹配数据库内所有文章进行推荐，web：仅当前站内的文章，默认all
     hide_shuttle: true # 是否隐藏矩阵穿梭
@@ -589,8 +579,7 @@ plugins:
       name: AI摘要
       introduce: '我是文章辅助AI: QX-AI，点击下方的按钮，让我生成本文简介、推荐相关文章等。'
       version: TianliGPT
-      button: ["介绍自己", "推荐文章", "生成摘要", "矩阵穿梭"]
-
+      button: ['介绍自己', '推荐文章', '生成摘要', '矩阵穿梭']
 
   # Katex - The fastest math typesetting library for the web
   # https://katex.org/docs/autorender.html
@@ -625,22 +614,20 @@ plugins:
     js: https://gcore.jsdelivr.net/npm/mermaid@v9/dist/mermaid.min.js
     # Available themes: default | dark | forest | neutral
     theme: neutral
-  
+
   # 代码块复制按钮
   copycode:
     enable: true
     default_text: 'Copy'
     success_text: 'Copied'
     toast: 复制成功
-  
+
   # 赫蹏 (Heti) - 专为中文网页内容设计的排版样式增强
   # https://github.com/sivan/heti
   heti:
     enable: false # 此插件会和代码块冲突，仅适用于纯中文博主。
     css: https://unpkg.com/heti@0.9/umd/heti.min.css
     js: https://unpkg.com/heti@0.9/umd/heti-addon.min.js
-
-
 
 style:
   prefers_theme: auto # auto / light / dark
@@ -706,7 +693,6 @@ style:
     h4: '|'
     h5: ':'
 
-
 default:
   avatar: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg
   link: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/link/8f277b4ee0ecd.svg
@@ -725,8 +711,6 @@ api_host:
   gist: gist.github.com
   # https://github.com/anuraghazra/github-readme-stats
   ghcard: github-readme-stats.vercel.app
-
-
 
 # 非资深hexo开发者尽量不要动这块
 system:

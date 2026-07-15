@@ -1,7 +1,9 @@
 <%
 function layoutDiv() {
   var el = ''
-  const isActive = pretty_url(item.url) == pretty_url(page.path)
+  const itemUrl = pretty_url(item.url)
+  const pageUrl = pretty_url(page.path)
+  const isActive = itemUrl == pageUrl || (item.active_prefix === true && pageUrl.startsWith(itemUrl))
   el += `<a class="link${isActive ? ' active' : ''}" title="${item.title}" href="${item.url}">`
   el += `<div class="flex">`
   if (item.icon) {

@@ -14,7 +14,9 @@ function layoutArchiveList() {
     page.banner = page.author.banner
     page.banner_info = {
       avatar: page.author.avatar,
-      subtitle: page.author.description
+      subtitle: page.author.description,
+      // 作者归档横幅文字颜色由 source/_data/authors.yml 中的 banner_text_color 控制。
+      color: page.author.banner_text_color
     }
     el += partial('_partial/main/navbar/article_banner')
     cls += ' author'

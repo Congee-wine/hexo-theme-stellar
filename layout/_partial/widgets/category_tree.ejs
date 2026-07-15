@@ -1,0 +1,132 @@
+<%
+/*
+ * Article category tree.
+ *
+ * Hexo associates a post with every level of a nested category path.  To
+ * avoid listing a nested post twice, each post is rendered only under its
+ * deepest category in the current branch.
+ */
+const pageCategories = []
+if (page.categories) {
+  page.categories.each(category => pageCategories.push(category))
+}
+
+if (pageCategories.length === 0) {
+  return
+}
+
+const categories = []
+site.categories.each(category => categories.push(category))
+
+const keyOf = category => `${category._id}`
+const categoriesById = new Map(categories.map(category => [keyOf(category), category]))
+const childrenByParent = new Map()
+for (const category of categories) {
+  const parentId = category.parent ? `${category.parent}` : ''
+  if (!childrenByParent.has(parentId)) {
+    childrenByParent.set(parentId, [])
+  }
+  childrenByParent.get(parentId).push(category)
+}
+
+const sortCategories = list => list.sort((a, b) => a.name.localeCompare(b.name, page.lang))
+for (const children of childrenByParent.values()) {
+  sortCategories(children)
+}
+
+function rootOf(category) {
+  const visited = new Set()
+  let current = category
+  while (current.parent && !visited.has(keyOf(current))) {
+    visited.add(keyOf(current))
+    const parent = categoriesById.get(`${current.parent}`)
+    if (!parent) {
+      break
+    }
+    current = parent
+  }
+  return current
+}
+
+function isDescendant(categoryId, ancestorId) {
+  const visited = new Set()
+  let current = categoriesById.get(categoryId)
+  while (current && current.parent && !visited.has(keyOf(current))) {
+    visited.add(keyOf(current))
+    if (`${current.parent}` === ancestorId) {
+      return true
+    }
+    current = categoriesById.get(`${current.parent}`)
+  }
+  return false
+}
+
+const activeCategoryIds = new Set(pageCategories.map(keyOf))
+const rootCategories = []
+const rootIds = new Set()
+for (const category of pageCategories) {
+  const root = rootOf(category)
+  if (!rootIds.has(keyOf(root))) {
+    rootIds.add(keyOf(root))
+    rootCategories.push(root)
+  }
+}
+sortCategories(rootCategories)
+
+function directPosts(category) {
+  const posts = []
+  category.posts.each(post => {
+    const postCategoryIds = []
+    post.categories.each(postCategory => postCategoryIds.push(keyOf(postCategory)))
+    const categoryId = keyOf(category)
+    const hasMoreSpecificCategory = postCategoryIds.some(postCategoryId =>
+      postCategoryId !== categoryId && isDescendant(postCategoryId, categoryId)
+    )
+    if (!hasMoreSpecificCategory) {
+      posts.push(post)
+    }
+  })
+  return posts.sort((a, b) => b.date.valueOf() - a.date.valueOf())
+}
+
+function layoutPost(post, level) {
+  const active = post._id === page._id
+  let el = `<a class="article-link${active ? ' active' : ''}" href="${pretty_url(post.path)}">`
+  el += `<span class="title" style="padding-left: ${(level + 1) * 0.875}rem;">${post.title}</span>`
+  if (active) {
+    el += icon('default:bookmark.active')
+  }
+  el += '</a>'
+  return el
+}
+
+function layoutCategory(category, level) {
+  const categoryId = keyOf(category)
+  const isActivePath = activeCategoryIds.has(categoryId)
+  let el = `<div class="category-subtree${isActivePath ? ' active-path' : ''}">`
+  el += `<a class="category-link${isActivePath ? ' active' : ''}" href="${pretty_url(category.path)}">`
+  el += `<span class="toc-text" style="padding-left: ${level * 0.875}rem;">${icon('default:category')}<span>${category.name}</span></span>`
+  el += `<span class="badge">${category.posts.length}</span>`
+  el += '</a>'
+
+  for (const post of directPosts(category)) {
+    el += layoutPost(post, level)
+  }
+  for (const child of childrenByParent.get(categoryId) || []) {
+    el += layoutCategory(child, level + 1)
+  }
+  el += '</div>'
+  return el
+}
+%>
+
+<widget class="widget-wrapper category-tree post-list">
+  <div class="widget-header dis-select">
+    <span class="name"><%= item.title || __('btn.categories') %></span>
+  </div>
+  <div class="widget-body fs14">
+    <% for (const category of rootCategories) { %>
+      <%- layoutCategory(category, 0) %>
+    <% } %>
+  </div>
+</widget>

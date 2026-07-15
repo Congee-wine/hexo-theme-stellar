@@ -110,7 +110,8 @@
   .content:only-child
     color: var(--text-p1)
   .bg+.content 
-    color: white
+    // 与标题共用横幅文字变量，便于 banner_text_color 同时控制标题和简介。
+    color: var(--text-banner)
     .avatar
       border: 2px solid white
       margin: 0

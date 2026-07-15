@@ -1,0 +1,87 @@
+.friend-cards
+  display: grid
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+  gap: 2rem
+  padding: 0.75rem 0
+
+.friend-card
+  perspective: 900px
+  min-width: 0
+
+.friend-card-link
+  --tilt-x: 0deg
+  --tilt-y: 0deg
+  display: block
+  width: 100%
+  box-sizing: border-box
+  height: 215px
+  padding: 12px
+  color: var(--text-p1)
+  text-align: center
+  text-decoration: none
+  border: 1px solid unquote('color-mix(in srgb, var(--friend-card-color) 16%, var(--block-border))')
+  border-radius: 14px
+  background: unquote('color-mix(in srgb, var(--friend-card-color) 18%, var(--card))')
+  box-shadow: none
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(0)
+  transition: transform .18s ease-out, box-shadow .25s ease, border-color .25s ease
+  will-change: transform
+
+  &:hover
+    border-color: unquote('color-mix(in srgb, var(--friend-card-color) 40%, var(--block-border))')
+    box-shadow: unquote('0 24px 42px color-mix(in srgb, var(--friend-card-color) 45%, transparent), 0 10px 18px rgba(30, 42, 55, 0.14)')
+
+.friend-card-shell
+  height: 100%
+  box-sizing: border-box
+  overflow: hidden
+  border-radius: 16px
+  background: var(--card)
+
+.friend-card-banner
+  height: 65px
+  border-radius: 10px 10px 0 0
+  background: unquote('linear-gradient(135deg, color-mix(in srgb, var(--friend-card-color) 88%, white), var(--friend-card-color))')
+
+.friend-card-content
+  position: relative
+  height: calc(100% - 70px)
+  box-sizing: border-box
+  padding: 34px 0.5rem 0.5rem
+  border-radius: 0 0 10px 10px
+  background: unquote('color-mix(in srgb, var(--friend-card-color) 4%, var(--card))')
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 0.18rem
+
+.friend-card-avatar
+  position: absolute
+  top: -28px
+  width: 54px
+  height: 54px
+  box-sizing: border-box
+  object-fit: cover
+  border: 3px solid var(--card)
+  border-radius: 50%
+  background: var(--card)
+  box-shadow: none
+
+.friend-card-owner
+  font-size: 16px
+  line-height: 1.2
+  font-weight: 700
+  color: var(--text-p1)
+
+.friend-card-site
+  font-size: 9px
+  color: var(--text-p3)
+
+.friend-card-desc
+  font-size: 10px
+  color: var(--text-p2)
+
+@media screen and (max-width: $device-mobile)
+  .friend-cards
+    grid-template-columns: repeat(2, minmax(0, 160px))
+    gap: 1rem

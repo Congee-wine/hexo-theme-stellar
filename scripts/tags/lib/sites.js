@@ -25,7 +25,8 @@ module.exports = ctx => function(args) {
     el += '<div class="grid-box"></div>'
     el += '</div>'
   } else if (args.group) {
-    const links = ctx.theme.config.links || {}
+    // 优先读取站点 source/_data/links.yml，兼容主题与站点配置中的 links。
+    const links = ctx.locals.get('data').links || ctx.theme.config.links || ctx.config.theme_config?.links || {}
     el += '<div class="grid-box">'
     for (let item of (links[args.group] || [])) {
       if (item?.url && item?.title) {

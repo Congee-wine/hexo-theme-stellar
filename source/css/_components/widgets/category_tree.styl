@@ -1,0 +1,30 @@
+.widget-wrapper.category-tree .widget-body
+  .category-subtree
+    margin-top: 2px
+  .category-link
+    font-weight: 400
+    .toc-text
+      display: flex
+      align-items: center
+      gap: 0.4rem
+      min-width: 0
+      svg
+        width: 1em
+        height: 1em
+        color: var(--text-p3)
+        opacity: 0.65
+        flex-shrink: 0
+    .badge
+      color: var(--text-p3)
+      font-size: $fs-12
+      margin-left: 0.5rem
+  .category-link.active
+    color: var(--text-p1)
+    .toc-text svg
+      color: var(--theme)
+      opacity: 1
+  .article-link
+    font-weight: 400
+  .article-link.active
+    color: var(--text-p1)
+    font-weight: 400

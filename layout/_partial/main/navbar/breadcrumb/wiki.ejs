@@ -1,11 +1,12 @@
 <%
 function layoutDiv() {
   const wikiObject = theme.wiki.tree[page.wiki]
+  const breadcrumbTitle = theme.site_tree.index_wiki.breadcrumb_title || __("btn.wiki")
   var el = ''
   // 文档列表页
   el += `<span class="sep"></span>`
   const wikiIndexPageURL = pretty_url(theme.site_tree.index_wiki.base_dir)
-  el += `<a class="cap breadcrumb" id="menu" href="${wikiIndexPageURL}">${__("btn.wiki")}</a>`
+  el += `<a class="cap breadcrumb" id="menu" href="${wikiIndexPageURL}">${breadcrumbTitle}</a>`
   if (wikiObject) {
     // 文档项目名
     const wikiHomePageURL = pretty_url(wikiObject.homepage?.path);

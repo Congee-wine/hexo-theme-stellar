@@ -10,6 +10,8 @@ if (page.banner) {
   banner.url = theme.wiki.tree[page.wiki]?.banner
 }
 banner = Object.assign(banner, page.banner_info)
+// 页面 front matter 可用 banner_text_color 直接覆盖横幅文字颜色。
+const bannerTextColor = page.banner_text_color || banner.color
 // 标题
 if (banner.title == null) {
   banner.title = page.h1 != null ? page.h1 : page.title
@@ -110,9 +112,9 @@ function layoutDiv() {
   el += `<div class="article banner${scrollreveal(' ')} top">`
   if (banner.url?.length > 0) {
     el += `<img class="lazy bg" data-src="${banner.url}">`
-    if (banner.color) {
-      style += ' style="--text-banner:' + banner.color + '"'
-    }
+  }
+  if (bannerTextColor) {
+    style += ' style="--text-banner:' + bannerTextColor + '"'
   }
   el += `
   <div class="content"${style}>
