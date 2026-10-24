@@ -250,7 +250,7 @@ test("Collection footer explicit true inherits Article defaults", () => {
       footer: { license: true, share: true }
     }, input.source);
     const article = build(input).render.article;
-    assert.deepEqual(article.footer.share.services, SHARE_SERVICE_IDS);
+    assert.deepEqual(article.footer.share.services, input.stellarConfig.article.footer.share);
     assert.match(article.footer.license, /署名-非商业性使用/);
   }
 });
@@ -386,6 +386,7 @@ test("Collection Brand source, style, back button, and search resolve independen
     image: { src: "/site.webp", variant: "avatar" },
     name: "Site",
     tagline: "Site tagline",
+    taglineHover: null,
     href: "/"
   });
 

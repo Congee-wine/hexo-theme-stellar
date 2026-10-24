@@ -117,7 +117,8 @@ function normalizeValue(node, value) {
     return value == null ? null : value.trim();
   }
   if (node.normalizer === "menu_item") {
-    return { id: value.id, title: value.title, icon: value.icon, url: value.url, accent: value.accent };
+    return { id: value.id, title: value.title, icon: value.icon, url: value.url, accent: value.accent,
+      ...(value.skin && value.skin !== "default" ? { skin: value.skin } : {}) };
   }
   if (node.normalizer === "footer_action") {
     if (value.type === "spacer") return { type: "spacer" };
@@ -136,7 +137,17 @@ function normalizeValue(node, value) {
     return { type: "button", icon: value.icon, title: value.title, onclick: value.onclick };
   }
   if (node.normalizer === "parameter_bag") {
-    return clone(value);
+    const result = clone(value);
+    // Sealed theme objects use runtime keys; open third-party parameter bags stay verbatim.
+    if (node.sealed && isPlainObject(result)) {
+      for (const [key, child] of Object.entries(node.properties || {})) {
+        if (child.runtimeKey && child.runtimeKey !== key && Object.hasOwn(result, key)) {
+          result[child.runtimeKey] = result[key];
+          delete result[key];
+        }
+      }
+    }
+    return result;
   }
   if (node.normalizer === "effect") {
     if (value == null) return null;

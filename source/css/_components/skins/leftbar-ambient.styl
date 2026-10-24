@@ -1,0 +1,31 @@
+if hexo-config('appearance.backgrounds.leftbar.skin') == 'ambient'
+  .site-shell[data-regions] .site-region--leftbar .site-region__surface.ui-surface
+    background: transparent
+    border: 0
+    box-shadow: none
+    backdrop-filter: none
+    -webkit-backdrop-filter: none
+    overflow: visible
+    &:before, &:after
+      display: none
+    > .site-region__decoration
+      display: block
+      position: absolute
+      pointer-events: none
+      inset: 32px
+      z-index: -1
+      border-radius: inherit
+      background: url(hexo-config('appearance.backgrounds.leftbar.image')) center / cover no-repeat
+      filter: blur(convert(hexo-config('appearance.backgrounds.leftbar.backdrop.radius'))) saturate(400%)
+      opacity: hexo-config('appearance.backgrounds.leftbar.opacity')
+      &:before
+        display: none
+      :root[data-theme='dark'] &
+        opacity: hexo-config('appearance.backgrounds.leftbar.opacity') * .75
+      :root:not([data-theme]) &
+        @media (prefers-color-scheme: dark)
+          opacity: hexo-config('appearance.backgrounds.leftbar.opacity') * .75
+
+  @media screen and (max-width: $device-tablet)
+    .site-shell[data-regions]:not([data-drawer='leftbar']) .site-region--leftbar .site-region__surface.ui-surface > .site-region__decoration
+      display: none

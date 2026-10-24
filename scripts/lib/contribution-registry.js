@@ -196,6 +196,20 @@ const CONTRIBUTIONS = defineContributions([
     project: () => configResult({})
   },
   {
+    id: "menu-tooltip",
+    scope: "region",
+    kind: "component",
+    entry: featureEntry("menu-tooltip"),
+    resources: [],
+    activation: selector(".menu [data-tooltip]"),
+    schema: null,
+    i18n: null,
+    docs: { category: "Components", path: PLUGIN_SYSTEM_DOC },
+    tests: [RUNTIME_CONSUMPTION_TEST],
+    defaultsOwner: null,
+    project: () => configResult({})
+  },
+  {
     id: "dropdown",
     scope: "region",
     kind: "component",

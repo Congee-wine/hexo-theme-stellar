@@ -1,0 +1,13 @@
+<%
+var entries = category_article_entries(page)
+var collection = partial('_partial/components/collection', {options: {
+  layout: 'list', variant: 'nav', density: 'compact', items: entries
+}})
+var skin = item.skin === 'default' ? 'default' : 'compact'
+%>
+<%- partial('_partial/components/widget-frame', {
+  className: 'category-articles',
+  title: item.title || __('btn.categories'),
+  attrs: {'data-skin': skin},
+  body: collection
+}) %>

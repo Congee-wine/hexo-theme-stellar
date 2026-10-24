@@ -13,7 +13,7 @@ function layoutDiv(linklist) {
       href: link.url,
       title: link.title,
       icon: link.icon,
-      active: pretty_url(link.url) == pretty_url(page.path),
+      active: pretty_url(link.url) == pretty_url(page.path) || (link.active_prefix === true && pretty_url(page.path).startsWith(pretty_url(link.url).replace(/\/$/, '') + '/')),
       showTitle: showTitle
     })
   }

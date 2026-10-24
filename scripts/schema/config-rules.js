@@ -20,7 +20,8 @@ const menuItem = item("object", {
     title: item(["string", "null"], { defaultValue: null }),
     icon: item(["string", "null"], { defaultValue: null, validator: "nullable_non_empty_string" }),
     url: item(["string", "null"], { defaultValue: null, validator: "nullable_safe_navigation_url" }),
-    accent: item(["string", "null"], { defaultValue: null, validator: "nullable_css_color" })
+    accent: item(["string", "null"], { defaultValue: null, validator: "nullable_css_color" }),
+    skin: item("string", { defaultValue: "default", values: ["default", "filled"] })
   }
 });
 
@@ -127,6 +128,7 @@ const brandProperties = {
   href: item(["string", "null"], { defaultValue: "/", validator: "nullable_safe_navigation_url" })
 };
 const leftbarBrandProperties = {
+  tagline_hover: item(["string", "null"], { defaultValue: null, runtimeKey: "taglineHover", validateInParameterBag: true }),
   search: item("boolean", { defaultValue: true }),
   ghrepo: item(["string", "null"], { defaultValue: null }),
   ghuser: item(["string", "null"], { defaultValue: null }),
@@ -147,6 +149,9 @@ const inheritedRegionBrand = properties => ({
 });
 
 const CONFIG_RULES = Object.freeze([
+  ["profiles.wiki_index.title", { type: ["string", "null"] }],
+  ["appearance.backgrounds.leftbar.skin", { values: ["default", "ambient"] }],
+  ["tags.friends.skin", { values: ["default", "polaroid"] }],
   ["footer.sitemap", { items: footerSitemapGroup }],
   ["footer.content", { normalizer: "trusted_text" }],
 

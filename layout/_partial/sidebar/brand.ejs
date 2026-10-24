@@ -41,7 +41,11 @@ function layoutBrandTitle() {
   var el = `<${tag} class="brand-title"${href ? ` href="${escape_html(url_for(href))}"` : ''}>`
   el += `<div class="brand-name">${escape_html(name)}</div>`
   if (brandStyle !== 'topbar' && tagline) {
-    el += `<div class="brand-tagline cap">${escape_html(tagline)}</div>`
+    if (brand.taglineHover) {
+      el += `<div class="brand-tagline brand-tagline--switch cap"><span>${escape_html(tagline)}</span><span>${escape_html(brandText(brand.taglineHover))}</span></div>`
+    } else {
+      el += `<div class="brand-tagline cap">${escape_html(tagline)}</div>`
+    }
   }
   el += `</${tag}>`
   return el

@@ -1,0 +1,58 @@
+.menu [data-menu-skin='filled']
+  position: relative
+  min-height: 52px
+  border-radius: $border-bar
+  background: transparent
+  color: var(--item-theme, var(--theme))
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease
+  .ui-icon
+    --ui-icon-opacity: 1
+    transition: transform .2s ease
+    svg, img
+      height: 20px
+      width: 20px
+  &:hover
+    background: unquote('color-mix(in srgb, var(--item-theme, var(--theme)) 14%, transparent)')
+    transform: translateY(-2px)
+    .ui-icon
+      transform: scale(1.1)
+  &:active
+    transform: scale(.94)
+  &.is-active
+    background: var(--item-theme, var(--theme))
+    color: white
+    box-shadow: unquote('0 6px 14px color-mix(in srgb, var(--item-theme, var(--theme)) 28%, transparent)')
+    .ui-icon
+      filter: brightness(0) invert(1)
+    .ui-collection__indicator
+      display: none
+
+.menu .ui-collection[data-variant='icon'] > [data-menu-skin='filled']
+  min-height: 0
+  aspect-ratio: 1
+  padding: 0
+
+.menu-tooltip
+  position: fixed
+  z-index: 1000
+  inset: auto
+  margin: 0
+  border: 0
+  padding: 6px 10px
+  border-radius: $border-button
+  background: white
+  color: #242424
+  box-shadow: $boxshadow-float
+  font-size: 13px
+  font-weight: $fw-600
+  white-space: nowrap
+  max-width: calc(100vw - 16px)
+  overflow: hidden
+  text-overflow: ellipsis
+  pointer-events: none
+
+@media (prefers-reduced-motion: reduce)
+  .menu [data-menu-skin='filled']
+    transition: none
+    &:hover, &:active
+      transform: none

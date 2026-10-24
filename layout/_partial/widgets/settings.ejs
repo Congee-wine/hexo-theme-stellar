@@ -11,7 +11,11 @@ var fallbackAvatarUrl = fallbackAvatar ? url_for(fallbackAvatar) : ''
 %>
 <a class="<%- ui_classes('settings-widget', 'collectionItem') %>" href="<%- escape_html(url_for(settingsUrl)) %>" data-profile-provider="<%- escape_html(provider) %>" data-profile-identity-enabled="<%- identityEnabled ? 'true' : 'false' %>" data-profile-fallback-avatar="<%- escape_html(fallbackAvatarUrl) %>" data-settings-placement="<%- escape_html(settingsPlacement) %>" data-settings-label="<%- escape_html(settingsName) %>" aria-label="<%- escape_html(settingsName) %>" title="<%- escape_html(settingsName) %>">
   <span class="settings-widget__avatar" aria-hidden="true">
+    <% if (fallbackAvatarUrl) { %>
+    <img class="settings-widget__image" src="<%- escape_html(fallbackAvatarUrl) %>" alt="">
+    <% } else { %>
     <span class="ui-icon"><%- icon('default:settings', '', true) %></span>
+    <% } %>
   </span>
   <span class="settings-widget__name ui-collection__title"><%- settingsName %></span>
 </a>

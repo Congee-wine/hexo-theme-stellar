@@ -258,11 +258,12 @@
     widget.setAttribute('aria-label', name);
     widget.setAttribute('title', name);
     if (!avatar) return;
+    var fallbackAvatar = widget.dataset.profileFallbackAvatar || '';
     if (!hasIdentity) {
-      renderIconMedia(avatar, SETTINGS_ICON);
+      if (fallbackAvatar) renderWidgetFallback(widget, avatar, fallbackAvatar, revision);
+      else renderIconMedia(avatar, SETTINGS_ICON);
       return;
     }
-    var fallbackAvatar = widget.dataset.profileFallbackAvatar || '';
     if (identity.avatar) {
       renderImageMedia(avatar, identity.avatar, function () {
         renderWidgetGravatar(widget, avatar, identity, fallbackAvatar, revision);

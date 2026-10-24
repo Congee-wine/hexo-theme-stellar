@@ -12,7 +12,10 @@ function renderAction(service) {
   if (!action) return ''
   var label = actionLabel(action)
   var classes = actionClasses(action)
-  var iconHtml = `<span class="share-item__icon ui-icon">${icon(`share:${action.service}`, '', true)}</span>`
+  var iconHtml = `<span class="share-item__icon ui-icon">${icon(action.kind === 'copy' ? 'default:link' : `share:${action.service}`, '', true)}</span>`
+  if (action.kind === 'copy') {
+    return `<button type="button" class="${classes}" data-share-copy="${escape_html(action.value)}" data-copy-message="${escape_html(__('message.copied'))}" data-copy-error="${escape_html(__('message.copy_denied'))}" aria-label="${escape_html(label)}" title="${escape_html(label)}">${iconHtml}</button>`
+  }
   if (action.kind === 'external') {
     return `<a class="${classes}" href="${escape_html(action.href)}" target="_blank" rel="external nofollow noopener noreferrer" aria-label="${escape_html(label)}" title="${escape_html(label)}">${iconHtml}</a>`
   }

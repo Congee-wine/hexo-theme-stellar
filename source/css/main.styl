@@ -28,3 +28,6 @@ else if $appearance-preset == 'minimal'
   @import '_appearances/minimal'
 else if $appearance-preset == 'flat'
   @import '_appearances/flat'
+
+// Explicit component skins apply independently of the site appearance preset.
+@import '_components/skins/*'

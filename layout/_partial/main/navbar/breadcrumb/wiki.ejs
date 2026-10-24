@@ -10,7 +10,7 @@ function layoutDiv() {
   var el = ''
   if (render.wikiIndexPath) {
     el += `<span class="sep"></span>`
-    el += `<a class="cap breadcrumb" id="menu" href="${pretty_url(render.wikiIndexPath)}">${__("btn.wiki")}</a>`
+    el += `<a class="cap breadcrumb" id="menu" href="${pretty_url(render.wikiIndexPath)}">${escape_html(stellar_config('profiles.wikiIndex.title') || __("btn.wiki"))}</a>`
   }
   for (var breadcrumb of render.breadcrumbs) {
     // 仅在 wiki 索引真实存在时做去重比较：wiki 挂在站点根时项目首页路径为空串，

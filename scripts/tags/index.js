@@ -3,6 +3,7 @@
 'use strict';
 
 // container
+hexo.extend.tag.register('intro', require('./lib/intro')(hexo), true)
 hexo.extend.tag.register('tabs', require('./lib/tabs')(hexo), true)
 hexo.extend.tag.register('box', require('./lib/box')(hexo), true)
 hexo.extend.tag.register('folding', require('./lib/folding')(hexo), true)

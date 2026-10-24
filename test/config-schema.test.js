@@ -8,6 +8,7 @@ const attachConfig = require("../scripts/events/lib/config-schema");
 const { ConfigSchemaError, parseStellarConfig } = require("../scripts/lib/config-schema");
 const { toRenderRegions } = require("../scripts/lib/layout-config");
 const { SHARE_SERVICE_IDS } = require("../scripts/lib/share-services");
+const { CONFIG_DEFAULTS } = require("../scripts/schema/config-schema");
 
 function assertDeepFrozen(value) {
   if (value == null || typeof value !== "object") return;
@@ -33,7 +34,7 @@ test("Theme config loads complete frozen defaults", () => {
   assert.equal(config.profiles.settings.about.items.length, 2);
   assert.equal(config.topbar.brand.style, undefined);
   assert.equal(config.leftbar.brand.style, "regular");
-  assert.deepEqual(config.article.footer.share, SHARE_SERVICE_IDS);
+  assert.deepEqual(config.article.footer.share, CONFIG_DEFAULTS.article.footer.share);
   assert.equal(config.profiles.notebook.footer, undefined);
   assertDeepFrozen(config);
 });
@@ -45,6 +46,7 @@ test("Theme config normalizes overrides without mutating open provider bags", ()
       preconnect: ["https://cdn.example.com"],
       profiles: { error: { image: null, comments: { enabled: true, provider: "giscus" } } },
       article: { listing: { excerpt_length: 42 } },
+      leftbar: { brand: { tagline_hover: "Keep exploring" } },
       comments: {
         provider: "giscus",
         giscus: { "data-repo": "owner/repo", nested_option: { enabled: true } }
@@ -57,6 +59,7 @@ test("Theme config normalizes overrides without mutating open provider bags", ()
   assert.equal(config.profiles.error.comments.enabled, true);
   assert.equal(config.profiles.error.comments.provider, "giscus");
   assert.equal(config.article.listing.excerptLength, 42);
+  assert.equal(config.leftbar.brand.taglineHover, "Keep exploring");
   assert.deepEqual(config.comments.giscus.nested_option, { enabled: true });
   assert.equal(config.canonical.host, null);
 });

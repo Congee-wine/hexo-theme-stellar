@@ -2,9 +2,9 @@ $glass-leftbar-background-type = hexo-config('appearance.backgrounds.leftbar.typ
 $glass-leftbar-background-image = hexo-config('appearance.backgrounds.leftbar.image')
 $glass-leftbar-has-extra-background = $glass-leftbar-background-type != 'none'
 $glass-leftbar-uses-image = $glass-leftbar-background-type == 'image' && $glass-leftbar-background-image
-$glass-leftbar-decoration-inset = 16px
+$glass-leftbar-decoration-inset = 32px
 $glass-leftbar-decoration-blur = convert(hexo-config('appearance.backgrounds.leftbar.backdrop.radius'))
-$glass-leftbar-decoration-saturation = 350%
+$glass-leftbar-decoration-saturation = 400%
 $glass-leftbar-gradient-light = hexo-config('appearance.backgrounds.leftbar.gradient.light')
 $glass-leftbar-gradient-dark = hexo-config('appearance.backgrounds.leftbar.gradient.dark')
 $glass-leftbar-gradient-light-base = unquote(hexo-config('appearance.backgrounds.leftbar.gradient.light.0'))
@@ -18,24 +18,26 @@ $glass-leftbar-gradient-dark-bottom = unquote(hexo-config('appearance.background
 
 glass-leftbar-background-filter($opacity)
   --background-opacity: $opacity
-  filter: saturate(var(--saturate)) blur(var(--blur-px)) opacity(var(--background-opacity))
+  filter: blur(var(--blur-px)) saturate(var(--saturate)) opacity(var(--background-opacity))
 
 glass-leftbar-background-image($opacity)
   glass-leftbar-background-filter($opacity)
-  background-color: transparent
-  background-image: url($glass-leftbar-background-image)
-  background-position: center
-  background-size: cover
-  background-repeat: no-repeat
+  &:before
+    background-color: transparent
+    background-image: url($glass-leftbar-background-image)
+    background-position: center
+    background-size: cover
+    background-repeat: no-repeat
 
 glass-leftbar-background-gradient($base, $top, $right, $bottom, $opacity)
   --background-opacity: $opacity
   filter: blur(var(--blur-px)) opacity(var(--background-opacity))
-  background-color: $base
-  background-image: radial-gradient(ellipse at 28% 24%, $top 0%, $top 65%, transparent 100%), radial-gradient(ellipse at 60% 50%, $right 0%, $right 60%, transparent 100%), conic-gradient(from 210deg at 32% 72%, $bottom 0deg, $bottom 110deg, transparent 190deg, $top 270deg, transparent 360deg)
-  background-position: left top, right 42%, left bottom
-  background-size: 56% 34%, 52% 30%, 60% 38%
-  background-repeat: no-repeat
+  &:before
+    background-color: $base
+    background-image: radial-gradient(ellipse at 28% 24%, $top 0%, $top 65%, transparent 100%), radial-gradient(ellipse at 60% 50%, $right 0%, $right 60%, transparent 100%), conic-gradient(from 210deg at 32% 72%, $bottom 0deg, $bottom 110deg, transparent 190deg, $top 270deg, transparent 360deg)
+    background-position: left top, right 42%, left bottom
+    background-size: 56% 34%, 52% 30%, 60% 38%
+    background-repeat: no-repeat
 
 .site-shell
   --shell-gap: var(--gap-page)
@@ -48,7 +50,19 @@ glass-leftbar-background-gradient($base, $top, $right, $bottom, $opacity)
 
 appearance-glass-interactions-light()
 appearance-standard-prose()
-appearance-card-listing-nav()
+
+.post-list:not(.topic) .post-card
+  background-color: var(--bg-a20)
+  backdrop-filter: saturate(140%) blur(24px)
+  -webkit-backdrop-filter: saturate(140%) blur(24px)
+
+.post-list #tags a.tag
+  isolation: isolate
+  background: transparent
+  glass-material(999px)
+  &:hover,
+  &:focus-visible
+    background: var(--bg-a20)
 
 // 折叠首文字默认使用轻背景；hover 由通用 Glass 交互材质接管。
 html[data-leftbar-state='collapsed'] .site-shell:not([data-drawer='leftbar']) .site-region--leftbar .widget-instance[data-leftbar-rail] .ui-collection > .ui-collection__item:has(> .ui-collection__initial):not(:hover)
@@ -73,6 +87,19 @@ html[data-leftbar-state='collapsed'] .site-shell:not([data-drawer='leftbar']) .s
 
 .site-region--leftbar .site-region__surface.ui-surface
   box-shadow: none
+
+@media screen and (min-width: ($device-tablet + 1px))
+  // Keep content above the sidebar glow, below drawers (10) and topbar (12).
+  .site-main
+    z-index: 9
+
+  .site-region--leftbar .site-region__surface.ui-surface
+    // Fade the surface into the glow instead of framing it with a saturated edge.
+    &:before
+      mask: linear-gradient(white, transparent 80%)
+      -webkit-mask: linear-gradient(white, transparent 80%)
+    &:after
+      display: none
 
 @media screen and (max-width: $device-laptop)
   .site-region--rightbar .site-region__surface.ui-drawer-surface
@@ -105,6 +132,16 @@ html[data-leftbar-state='collapsed'] .site-shell:not([data-drawer='leftbar']) .s
       --saturate: $glass-leftbar-decoration-saturation
       --blur-px: $glass-leftbar-decoration-blur
       --background-opacity: 1
+      &:before
+        content: ''
+        position: absolute
+        inset: 0
+        border-radius: inherit
+      @media screen and (min-width: ($device-tablet + 1px))
+        right: calc(var(--inset) + 24px)
+        // Shape the source before the parent blur so the widening edge stays soft.
+        &:before
+          clip-path: polygon(0 0, 65% 0, 100% 100%, 0 100%)
       if $glass-leftbar-uses-image
         glass-leftbar-background-image(hexo-config('appearance.backgrounds.leftbar.opacity'))
       else if length($glass-leftbar-gradient-light) == 4
@@ -138,6 +175,9 @@ if $glass-leftbar-has-extra-background
     .site-region--leftbar
       appearance-translucent-leftbar-dark()
 
-.listing-nav__surface.is-pinned
+.listing-nav__surface,
+.paginator-wrap
+  position: relative
+  isolation: isolate
   bar-glass()
   background: transparent

@@ -93,6 +93,7 @@ function brandSchema(factory, options = {}) {
       ghuser: field(["string", "null"], { default: literal(null), example: "xaoxuu" }),
       source: field("string", { default: computed("由 Site 或 Collection Brand 来源解析"), example: "site" }),
       style: field("string", { default: literal("regular"), example: "regular" }),
+      taglineHover: field(["string", "null"], { example: "Keep exploring" }),
       backButton: field("boolean", { default: literal(true), example: true }),
       search: field("boolean", { default: literal(true), example: true }),
       backHref: field(["string", "null"], { default: computed("由 Collection 类型的索引路径生成"), example: "/wiki/" }),

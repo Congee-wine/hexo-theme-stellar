@@ -42,6 +42,8 @@ leftbar:
     search: true
     # 设置 Leftbar Brand 的视觉样式；可选值为 regular 或 compact。
     style: regular
+    # 鼠标或键盘聚焦品牌时显示的替代标语。
+    tagline_hover: null
     # 设置 Brand 数据区的 GitHub 仓库（owner/repo）；留空不显示仓库统计。
     ghrepo: null
     # 设置 Brand 数据区的 GitHub 用户名；未设置 ghrepo 时使用，留空不显示。
@@ -252,6 +254,8 @@ profiles:
 
   # 配置 Wiki 列表页默认布局。
   wiki_index:
+    # 自定义 Wiki 索引面包屑名称；null 使用主题翻译。
+    title: null
     # 设置 Wiki 列表页的自动生成路径；null 表示不生成列表页。
     path: /wiki/
     # 设置 Wiki 列表页高亮的主菜单项；null 表示不高亮。
@@ -588,6 +592,8 @@ appearance:
     leftbar:
       # 设置 Leftbar 背景类型；可选值为 none、gradient 或 image。
       type: gradient
+      # default 沿用外观预设；ambient 单独使用透明栏与模糊背景图片。
+      skin: default
       # 设置 Leftbar 背景图片；null 表示不使用图片。
       image: null
       # 配置浅色与深色模式的 Leftbar 渐变色组。
@@ -768,6 +774,9 @@ comments:
 
 # 配置标签插件的默认表现。
 tags:
+  # 本地友链可选 default 或 polaroid；标签 skin 参数可以单独覆盖。
+  friends:
+    skin: default
   # 配置 note 标签插件。
   note:
     # 设置 note 默认颜色；空字符串表示使用主题默认色。

@@ -1001,6 +1001,17 @@ stellar.toast = hud.toast;
  */
 stellar.initPage = function (root = document) {
   const controller = new AbortController();
+  root.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-share-copy]');
+    if (!button || !root.contains(button)) return;
+    if (!navigator.clipboard) {
+      hud.toast(button.dataset.copyError, 2500);
+      return;
+    }
+    navigator.clipboard.writeText(button.dataset.shareCopy).then(function () {
+      hud.toast(button.dataset.copyMessage, 2500);
+    }).catch(function () { hud.toast(button.dataset.copyError, 2500); });
+  }, { signal: controller.signal });
   const cleanupToc = init.tocLinks(root);
   init.listingNavPin(root, controller.signal);
   init.relativeDate(root.querySelectorAll('#post-meta time'));

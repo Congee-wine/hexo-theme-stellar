@@ -19,7 +19,9 @@ function layoutDiv() {
       href: pretty_url(menuItem.url),
       title: __(menuItem.title),
       icon: menuItem.icon,
-      attrs: iconLayout ? {'aria-label': __(menuItem.title)} : {},
+      attrs: Object.assign(iconLayout ? {'aria-label': __(menuItem.title)} : {}, menuItem.skin === 'filled' ? {
+        'data-menu-skin': 'filled', 'data-tooltip': __(menuItem.title), title: false
+      } : {}),
       theme: menuItem.accent,
       active: menuItem.id == currentMenu,
       className: menuItem.accent?.length > 0 ? 'is-themed' : ''

@@ -62,6 +62,33 @@
     overflow: hidden
     text-overflow: ellipsis
 
+.brand-tagline--switch
+  position: relative
+  display: grid
+  >span
+    // Let both lines contribute to the width while sharing one animation slot.
+    grid-area: 1 / 1
+    display: block
+    overflow: hidden
+    text-overflow: ellipsis
+    trans2 opacity transform
+  >span+span
+    opacity: 0
+    transform: translateY(8px)
+
+.brand-title:hover .brand-tagline--switch,
+.brand-title:focus-within .brand-tagline--switch
+  >span:first-child
+    opacity: 0
+    transform: translateY(-8px)
+  >span+span
+    opacity: 1
+    transform: translateY(0)
+
+@media (prefers-reduced-motion: reduce)
+  .brand-tagline--switch >span
+    transition: none
+
 .brand-header--regular
   &.brand-header--site > .brand-wrap
     padding-top: 2rem

@@ -8,13 +8,16 @@
 'use strict'
 
 module.exports = ctx => function(args) {
-  args = ctx.args.map(args, ['repo', 'api', 'posts'], ['group'])
+  args = ctx.args.map(args, ['repo', 'api', 'posts', 'skin'], ['group'])
   const rawUrl = ctx.stellar.config.services.github.rawUrl.replace(/\/+$/, '')
   var api
   if (args.api) {
     api = args.api
   } else if (args.repo) {
     api = `${rawUrl}/${args.repo}/output/v2/data.json`
+  }
+  if (!api && args.group && (args.skin || ctx.stellar.config.tags.friends.skin) === 'polaroid') {
+    return require('./friends-polaroid')(ctx, ctx.stellar.data.links?.[args.group] || [])
   }
   
   var el = `<div class="tag-plugin ${args.posts ? 'users-posts-wrap' : 'users-wrap'}">`

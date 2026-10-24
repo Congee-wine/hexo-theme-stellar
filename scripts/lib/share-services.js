@@ -6,7 +6,8 @@ const SHARE_SERVICE_IDS = Object.freeze([
   "x",
   "telegram",
   "whatsapp",
-  "email"
+  "email",
+  "copy"
 ]);
 
 const SHARE_SERVICE_SET = new Set(SHARE_SERVICE_IDS);
@@ -16,7 +17,8 @@ const SHARE_SERVICE_LABELS = Object.freeze({
   email: "Email",
   x: "X",
   telegram: "Telegram",
-  whatsapp: "WhatsApp"
+  whatsapp: "WhatsApp",
+  copy: "Copy link"
 });
 
 function text(value) {
@@ -46,7 +48,10 @@ function buildShareAction(service, share = {}) {
     label: SHARE_SERVICE_LABELS[service]
   };
 
-  if (service === "qrcode") {
+  if (service === "copy") {
+    action.kind = "copy";
+    action.value = permalink;
+  } else if (service === "qrcode") {
     action.kind = "toggle";
     action.target = "share-qrcode";
   } else if (service === "weibo") {

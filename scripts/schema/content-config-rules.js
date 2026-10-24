@@ -123,6 +123,7 @@ const CONTENT_OVERRIDE_DEFINITIONS = [
   ["leftbar.brand.image.variant", ["string", "null"], literal(null), { values: ["avatar", "icon", "plain", null] }],
   ["leftbar.brand.name", ["string", "null"], literal(null)],
   ["leftbar.brand.tagline", ["string", "null"], literal(null)],
+  ["leftbar.brand.tagline_hover", ["string", "null"], literal(null)],
   ["leftbar.brand.ghrepo", ["string", "null"], literal(null)],
   ["leftbar.brand.ghuser", ["string", "null"], literal(null)],
   ["leftbar.brand.search", ["boolean", "null"], literal(null)],
