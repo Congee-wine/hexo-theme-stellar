@@ -23,6 +23,7 @@ const PRESENTATIONS_BY_LAYOUT = Object.freeze({
   ghuser: Object.freeze(["leftbar", "rightbar", "drawer"]),
   author: Object.freeze(["leftbar", "rightbar", "drawer"]),
   timeline: Object.freeze(["leftbar", "rightbar", "drawer"]),
+  heatmap: Object.freeze(["leftbar", "rightbar", "drawer"]),
   markdown: Object.freeze(["leftbar", "rightbar", "drawer"])
 });
 

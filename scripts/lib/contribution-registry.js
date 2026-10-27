@@ -30,6 +30,23 @@ function configResult(config, when) {
 
 const CONTRIBUTIONS = defineContributions([
   {
+    id: "heatmap",
+    scope: "region",
+    kind: "component",
+    entry: featureEntry("heatmap"),
+    resources: [],
+    activation: selector("[data-heatmap]"),
+    schema: null,
+    i18n: {
+      namespace: "heatmap",
+      keys: ["heatmap.title", "heatmap.summary", "heatmap.day", "heatmap.stats", "heatmap.today", "heatmap.empty", "heatmap.loading", "heatmap.close"]
+    },
+    docs: { category: "Components", path: "docs/knowledge/02-布局系统/sidebar-system.md" },
+    tests: [RUNTIME_TEST, RUNTIME_CONSUMPTION_TEST],
+    defaultsOwner: null,
+    project: () => configResult({})
+  },
+  {
     id: "pin-slider",
     scope: "region",
     kind: "component",

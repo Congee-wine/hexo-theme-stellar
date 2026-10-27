@@ -1,0 +1,124 @@
+.heatmap-widget
+  .widget-body
+    padding: 12px var(--gap-base) 0
+
+.heatmap
+  --heatmap-gap: 3px
+  --heatmap-min-cell: 12px
+  min-width: 0
+  line-height: 1.6
+
+  .heatmap-chart
+    display: grid
+    grid-template-columns: minmax(0, 1fr) 14px
+    gap: 10px
+
+  .heatmap-calendar
+    min-width: 0
+
+  .heatmap-grid
+    position: relative
+    display: grid
+    grid-template-columns: repeat(var(--heatmap-columns, 15), minmax(0, 1fr))
+    grid-template-rows: repeat(7, minmax(0, 1fr))
+    gap: var(--heatmap-gap)
+    touch-action: pan-y
+
+  .heatmap-weekdays
+    display: grid
+    grid-template-rows: repeat(7, minmax(0, 1fr))
+    align-items: center
+    gap: var(--heatmap-gap)
+    min-height: 0
+    font-size: 10px
+    line-height: 1
+    color: var(--text-p2)
+
+  .heatmap-cell[data-level]
+    display: block
+    box-sizing: border-box
+    aspect-ratio: 1
+    min-width: 0
+    min-height: 0
+    padding: 0
+    border: 0
+    border-radius: 30%
+    background: var(--heatmap-fill)
+    box-shadow: inset 0 0 0 1px var(--heatmap-ring, transparent)
+    cursor: pointer
+    &[data-level='0']
+      --heatmap-fill: var(--text-a10)
+    &[data-level='1']
+      --heatmap-fill: unquote('color-mix(in srgb, var(--theme) 25%, var(--background))')
+    &[data-level='2']
+      --heatmap-fill: unquote('color-mix(in srgb, var(--theme) 45%, var(--background))')
+    &[data-level='3']
+      --heatmap-fill: unquote('color-mix(in srgb, var(--theme) 70%, var(--background))')
+    &[data-level='4']
+      --heatmap-fill: var(--theme)
+    &[aria-current='date']
+      --heatmap-ring: var(--theme)
+    &:hover,
+    &[data-preview],
+    &[aria-pressed='true']
+      --heatmap-ring: var(--text-p2)
+    &:focus-visible
+      z-index: 1
+
+  .heatmap-info
+    margin-top: 12px
+    color: var(--text-p1)
+    font-size: $fs-13
+    font-weight: $fw-500
+
+  .heatmap-details__header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 8px
+
+  .heatmap-details__date
+    color: var(--text-p3)
+
+  .heatmap-details__stats
+    margin-top: 4px
+
+  .heatmap-details__posts
+    margin: 8px 0 0
+    padding-left: 1.15em
+    li
+      font-size: inherit
+    li + li
+      margin-top: 6px
+
+  .heatmap-details__empty
+    list-style: none
+    margin-left: -1.15em
+    color: var(--text-p3)
+
+  .heatmap-post
+    display: block
+    padding: 2px 4px
+    margin-left: -4px
+    border-radius: $border-button
+    color: var(--text-p1)
+    overflow-wrap: anywhere
+    &:hover,
+    &:focus-visible
+      color: var(--link)
+
+  .heatmap-details__close
+    display: grid
+    place-items: center
+    width: 24px
+    height: 24px
+    flex-shrink: 0
+    padding: 0
+    border: 0
+    border-radius: $border-button
+    color: var(--text-p3)
+    font-family: inherit
+    font-size: $fs-16
+    cursor: pointer
+    &[hidden]
+      display: none

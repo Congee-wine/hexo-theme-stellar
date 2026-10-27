@@ -25,6 +25,16 @@ btn:
   collapse_posts: Collapse
   search: Search
 
+heatmap:
+  title: Writing Activity
+  summary: 'Little by little, {count} posts written in total!'
+  day: '{date} · {count} posts · {words} words'
+  stats: '{count} posts, {words} words'
+  today: Today
+  empty: No posts on this day
+  loading: Loading publishing calendar…
+  close: Close day details
+
 menu:
   blog: Blog
   categories: Categories

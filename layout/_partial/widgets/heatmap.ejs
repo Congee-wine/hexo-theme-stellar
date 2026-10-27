@@ -1,0 +1,43 @@
+<%
+var heatmapData = heatmap_data()
+var heatmapMessages = {}
+;['title', 'summary', 'day', 'stats', 'today', 'empty', 'loading', 'close'].forEach(function(key) {
+  heatmapMessages[key] = __('heatmap.' + key)
+})
+var heatmapLocale = page.lang || page.language || config.language
+if (Array.isArray(heatmapLocale)) heatmapLocale = heatmapLocale[0]
+%>
+<%- partial('_partial/components/widget-frame', {
+  className: 'heatmap-widget',
+  title: item.title || heatmapMessages.title,
+  reveal: false,
+  body: `
+    <div class="heatmap" data-heatmap>
+      <script type="application/json" data-heatmap-data>${script_json(Object.assign({}, heatmapData, {
+        locale: heatmapLocale || 'en',
+        messages: heatmapMessages,
+        classes: {
+          cell: ui_classes('heatmap-cell', 'interactive'),
+          link: ui_classes('heatmap-post', 'interactive')
+        }
+      }))}</script>
+      <div class="heatmap-chart">
+        <div class="heatmap-calendar" data-heatmap-calendar>
+          <div class="heatmap-grid" data-heatmap-grid role="group" aria-label="${escape_html(heatmapMessages.title)}"></div>
+        </div>
+        <div class="heatmap-weekdays" data-heatmap-weekdays aria-hidden="true"></div>
+      </div>
+      <div class="heatmap-info" data-heatmap-info aria-live="polite">
+        <div class="heatmap-summary" data-heatmap-summary>${escape_html(heatmapMessages.loading)}</div>
+        <div class="heatmap-details" data-heatmap-details role="region" hidden>
+          <div class="heatmap-details__header">
+            <span class="heatmap-details__date" data-heatmap-date></span>
+            <button type="button" class="${ui_classes('heatmap-details__close', 'interactive')}" data-heatmap-close aria-label="${escape_html(heatmapMessages.close)}" hidden>&#215;</button>
+          </div>
+          <div class="heatmap-details__stats" data-heatmap-stats></div>
+          <ul class="heatmap-details__posts" data-heatmap-posts></ul>
+        </div>
+      </div>
+    </div>
+  `
+}) %>

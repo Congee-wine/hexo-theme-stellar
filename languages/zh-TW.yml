@@ -25,6 +25,16 @@ btn:
   collapse_posts: 收起
   search: 搜尋
 
+heatmap:
+  title: 熱力圖
+  summary: '寫寫停停，總共已經記錄了 {count} 篇文章！'
+  day: '{date} · {count} 篇文章 · {words} 字'
+  stats: '共 {count} 篇，{words} 字'
+  today: 今天
+  empty: 這一天沒有發布文章
+  loading: 正在載入發布日曆…
+  close: 關閉日期詳情
+
 menu:
   blog: 網誌
   categories: 分類

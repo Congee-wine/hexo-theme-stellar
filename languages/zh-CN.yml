@@ -25,6 +25,16 @@ btn:
   collapse_posts: 收起
   search: 搜索
 
+heatmap:
+  title: 热力图
+  summary: '写写停停，总共已经记录了 {count} 篇文章！'
+  day: '{date} · {count} 篇文章 · {words} 字'
+  stats: '共 {count} 篇，{words} 字'
+  today: 今天
+  empty: 这一天没有发布文章
+  loading: 正在加载发布日历…
+  close: 关闭日期详情
+
 menu:
   blog: 博客
   categories: 分类

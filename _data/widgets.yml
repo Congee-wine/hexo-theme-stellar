@@ -37,6 +37,9 @@ toc:
     '_posts/':
     'wiki/stellar/': https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/
 
+heatmap:
+  layout: heatmap
+
 # GitHub 用户信息
 ghuser:
   layout: ghuser
